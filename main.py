@@ -18,8 +18,8 @@ def signal_handler(sig, frame):
     root.quit()
 
 
-def start_app(app, stop_event):
-    app.start(stop_event)
+def start_app(application, stop_event_instance):
+    application.start(stop_event_instance)
 
 
 if __name__ == '__main__':
@@ -33,15 +33,15 @@ if __name__ == '__main__':
     root = tk.Tk()
 
     # Display a message when the app starts
-    start_message = tk.Label(root, text="Speach To Text", font=("Arial", 14))
+    start_message: tk.Label = tk.Label(root, text="Speach To Text", font=("Arial", 14))
     start_message.pack(pady=20)  # Add some padding for better layout
 
-    label = tk.Label(root, text="Idle", font=("Arial", 12))
+    label: tk.Label = tk.Label(root, text="Idle", font=("Arial", 12))
     label.pack()
 
-    state_change_indicator = StateChangeIndicator(label)
+    state_change_indicator: StateChangeIndicator = StateChangeIndicator(label)
 
-    app = WhisperApp(whisper_model_path, hotkey, state_change_indicator)
+    app: WhisperApp = WhisperApp(whisper_model_path, hotkey, state_change_indicator)
 
     # Start the WhisperApp in a separate thread
     app_thread = threading.Thread(target=start_app, args=(app, stop_event))
