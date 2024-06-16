@@ -44,7 +44,7 @@ if __name__ == '__main__':
     app: WhisperApp = WhisperApp(whisper_model_path, hotkey, state_change_indicator)
 
     # Start the WhisperApp in a separate thread
-    app_thread = threading.Thread(target=start_app, args=(app, stop_event))
+    app_thread: threading.Thread = threading.Thread(target=start_app, args=(app, stop_event))
     app_thread.start()
 
     # Start the Tkinter event loop in the main thread
